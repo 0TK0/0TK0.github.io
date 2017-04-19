@@ -1,0 +1,396 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>txt2excel | 景行行止</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="zhuyuqing">
+    
+
+    
+    <meta name="description" content="直接贴代码……">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="txt2excel">
+<meta property="og:url" content="http://yoursite.com/2017/04/19/txt2excel/index.html">
+<meta property="og:site_name" content="景行行止">
+<meta property="og:description" content="直接贴代码……">
+<meta property="og:updated_time" content="2017-04-19T12:04:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="txt2excel">
+<meta name="twitter:description" content="直接贴代码……">
+
+    
+    
+    <link rel="icon" href="/img/jacman.jpg">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/jacman.jpg" alt="景行行止" title="景行行止"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="景行行止">景行行止</a></h1>
+				<h2 class="blog-motto">do or die</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/19/txt2excel/" title="txt2excel" itemprop="url">txt2excel</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="zhuyuqing" target="_blank" itemprop="author">zhuyuqing</a>
+		
+  <p class="article-time">
+    <time datetime="2017-04-19T11:58:21.000Z" itemprop="datePublished"> 发表于 2017-04-19</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			
+		
+		</div>
+		
+		<p>直接贴代码……<a id="more"></a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> com.zyq.read;</div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.File;</div><div class="line"><span class="keyword">import</span> java.io.FileInputStream;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">import</span> jxl.Workbook;</div><div class="line"><span class="keyword">import</span> jxl.write.Label;</div><div class="line"><span class="keyword">import</span> jxl.write.WritableSheet;</div><div class="line"><span class="keyword">import</span> jxl.write.WritableWorkbook;</div><div class="line"><span class="keyword">import</span> jxl.write.WriteException;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateExcelForDD</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"><span class="comment">/*</span></div><div class="line">* 1.打开文件</div><div class="line">* 2.生成名为“第一页”的工作表，参数0表示这是第一页 </div><div class="line">* 3.读取"客户资料.txt"文件内容 </div><div class="line">* 4.读取的每行字符串</div><div class="line">* 5.根据~分割字符串 </div><div class="line">* 6.将分割后的字符子串放到aList中 </div><div class="line">* 7.将aList放到大的arrayList中</div><div class="line">* 8.遍历arrayList，将其中的数据写入到xls表中 </div><div class="line">* 9.将数据写到j列i行</div><div class="line">*/</div><div class="line">	WritableWorkbook book = <span class="keyword">null</span>;</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		book = Workbook.createWorkbook(<span class="keyword">new</span> File(<span class="string">"F:\\客户资料.xls"</span>));<span class="comment">// 1</span></div><div class="line">		WritableSheet sheet = book.createSheet(<span class="string">"第一页"</span>, <span class="number">0</span>); <span class="comment">// 2</span></div><div class="line">		ArrayList&lt;ArrayList&lt;String&gt;&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">	<span class="keyword">try</span> &#123;</div><div class="line">		String eccoding = <span class="string">"GBK"</span>;</div><div class="line">		File file = <span class="keyword">new</span> File(<span class="string">"F:\\客户资料.txt"</span>);<span class="comment">// 3</span></div><div class="line">		<span class="keyword">if</span> (file.isFile() &amp;&amp; file.exists()) &#123;</div><div class="line">			InputStreamReader reader = <span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> FileInputStream(file), eccoding);</div><div class="line">		BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(reader);</div><div class="line">		String lineTxt = <span class="keyword">null</span>;<span class="comment">// 4</span></div><div class="line">		<span class="keyword">while</span> ((lineTxt = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">			ArrayList&lt;String&gt; aList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">			String[] strings = lineTxt.split(<span class="string">"~"</span>);<span class="comment">// 5</span></div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strings.length; i++) &#123;</div><div class="line">			aList.add(strings[i]);<span class="comment">// 6</span></div><div class="line">	&#125;</div><div class="line">	arrayList.add(aList);<span class="comment">// 7</span></div><div class="line">&#125;</div><div class="line">&#125; <span class="keyword">else</span></div><div class="line">	System.out.println(<span class="string">"file is not exist or file is not a file"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">	System.out.println(e);</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arrayList.size(); i++) &#123;<span class="comment">// 8</span></div><div class="line">	ArrayList&lt;String&gt; aList2 = arrayList.get(i);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; aList2.size(); j++) &#123;</div><div class="line">		Label label = <span class="keyword">new</span> Label(j, i, aList2.get(j));<span class="comment">// 9</span></div><div class="line">		sheet.addCell(label);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">book.write();</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">	System.out.println(e);</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	book.close();</div><div class="line">&#125; <span class="keyword">catch</span> (WriteException e) &#123;</div><div class="line">	e.printStackTrace();</div><div class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">	e.printStackTrace();</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/19/关于intern-方法/" title="关于intern()方法">
+  <strong>上一篇：</strong><br/>
+  <span>
+  关于intern()方法</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2017/04/19/txt2excel/" data-title="txt2excel" data-url="http://yoursite.com/2017/04/19/txt2excel/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=18667109058&verifier=6da22b3e&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m TK in Hangzhou. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/18667109058" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="zhuyuqing">zhuyuqing</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"要成为山治一样男人的男人"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
