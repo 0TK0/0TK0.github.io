@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
+    <meta name="description" content="关于类加载机制class文件结构／类加载机制">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm学习笔记二">
 <meta property="og:url" content="http://yoursite.com/2017/04/19/jvm学习笔记二/index.html">
 <meta property="og:site_name" content="景行行止">
-<meta property="og:description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
-<meta property="og:updated_time" content="2017-04-19T08:08:46.000Z">
+<meta property="og:description" content="关于类加载机制class文件结构／类加载机制">
+<meta property="og:updated_time" content="2017-04-19T08:16:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm学习笔记二">
-<meta name="twitter:description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
+<meta name="twitter:description" content="关于类加载机制class文件结构／类加载机制">
 
     
     <link rel="alternative" href="/atom.xml" title="景行行止" type="application/atom+xml">
@@ -101,7 +101,9 @@
 		
 		</div>
 		
-		<h1 id="关于类加载机制"><a href="#关于类加载机制" class="headerlink" title="关于类加载机制"></a>关于类加载机制</h1><h2 id="Class文件"><a href="#Class文件" class="headerlink" title="Class文件"></a>Class文件</h2><p>Class文件是一组以8个字节为基础单位的二进制流；</p>
+		<h1 id="关于类加载机制"><a href="#关于类加载机制" class="headerlink" title="关于类加载机制"></a>关于类加载机制</h1><p>class文件结构／类加载机制</p>
+<a id="more"></a>
+<h2 id="Class文件"><a href="#Class文件" class="headerlink" title="Class文件"></a>Class文件</h2><p>Class文件是一组以8个字节为基础单位的二进制流；</p>
 <p>Class文件格式：无符号数和表。<strong>无符号数</strong>用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。<strong>表</strong>由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。</p>
 <p>Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。</p>
 <p>Java重载（override）：和原方法的方法名一样并且必须有一个与原方法不同的特征签名。特征签名是一个方法中的各个参数在常量池中的字段符号引用的集合。所以不能仅仅根据返回值类型不同来对一个方法进行重载。</p>
