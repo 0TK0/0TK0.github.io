@@ -11,17 +11,17 @@
     
 
     
-    <meta name="description" content="赢回你赞赏之前起码要做我欣赏的我">
+    <meta name="description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
 <meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm学习笔记二">
 <meta property="og:url" content="http://yoursite.com/2017/04/19/jvm学习笔记二/index.html">
 <meta property="og:site_name" content="景行行止">
-<meta property="og:description" content="赢回你赞赏之前起码要做我欣赏的我">
-<meta property="og:updated_time" content="2017-04-19T07:35:35.000Z">
+<meta property="og:description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
+<meta property="og:updated_time" content="2017-04-19T08:08:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm学习笔记二">
-<meta name="twitter:description" content="赢回你赞赏之前起码要做我欣赏的我">
+<meta name="twitter:description" content="关于类加载机制Class文件Class文件是一组以8个字节为基础单位的二进制流； Class文件格式：无符号数和表。无符号数用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。表由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。 Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。 Java重载">
 
     
     <link rel="alternative" href="/atom.xml" title="景行行止" type="application/atom+xml">
@@ -97,11 +97,42 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关于类加载机制"><span class="toc-number">1.</span> <span class="toc-text">关于类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class文件"><span class="toc-number">1.1.</span> <span class="toc-text">Class文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载机制"><span class="toc-number">1.2.</span> <span class="toc-text">类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#加载"><span class="toc-number">1.2.1.</span> <span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证"><span class="toc-number">1.2.2.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-number">1.2.3.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">1.2.4.</span> <span class="toc-text">解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始化</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		  
+		<h1 id="关于类加载机制"><a href="#关于类加载机制" class="headerlink" title="关于类加载机制"></a>关于类加载机制</h1><h2 id="Class文件"><a href="#Class文件" class="headerlink" title="Class文件"></a>Class文件</h2><p>Class文件是一组以8个字节为基础单位的二进制流；</p>
+<p>Class文件格式：无符号数和表。<strong>无符号数</strong>用来描述数字、索引引用、数量值或按照UTF-8编码构成字符串值。<strong>表</strong>由多个无符号数或者其他表构成的复合数据类型，class文件本质上就是一张表。</p>
+<p>Class的结构没有任何分隔符，无论是顺序还是数量，甚至是数据存储的字节序（Big-Endian）都是被严格规定好的。</p>
+<p>Java重载（override）：和原方法的方法名一样并且必须有一个与原方法不同的特征签名。特征签名是一个方法中的各个参数在常量池中的字段符号引用的集合。所以不能仅仅根据返回值类型不同来对一个方法进行重载。</p>
+<h2 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h2><p>类从加载到卸载经过<strong>7个过程：加载、验证、准备、解析、初始化、使用、卸载。</strong>其中解析在某些情况下也可以在初始化之后（支持java动态绑定）。</p>
+<p><strong>有且只有</strong>在以下<strong>五种</strong>情况下，必须对类进行初始化：</p>
+<p>1、 new、getStatic（读取类静态字段）、putStatic（设置类的静态字段）、invokeStatic（调用类的静态方法）；</p>
+<p>2、 使用java.lang.reflect包的方法对类进行反射调用的时候；</p>
+<p>3、 初始化子类时，父类未初始化；</p>
+<p>4、 执行主类时（main方法所在的函数）</p>
+<p>5、 使用JDK1.7动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后的解析结果为REF_getStatic、REF_putStatic、REF_invokeStatic的方法句柄，且这个方法的句柄所对应的类未初始化。</p>
+<p>除了这5种之外的所有引用类的方式都不会触发初始化（被动引用），例如：</p>
+<p>1)      对于调用静态字段，只有直接定义这个字段的类才会被初始化。如通过子类来引用父类中定义的静态字段，只会触发父类的初始化而不会初始化子类；</p>
+<p>2)      引用类的常量时，常量在编译阶段会存入调用类的常量池中，本质上并没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化；</p>
+<p>3)      通过数组定义来引用类，不会触发此类的初始化。例如定义了App类，在初始化App[] app = new App[]不会初始化App类。</p>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><p>加载主要完成三件事：</p>
+<p>1、 通过一个类的全限定名来获取定义此类的二进制字节流；（从zip包读取，从网络中获取（Applet），由jsp文件生成对应的Class类）</p>
+<p>2、 将这个字节流所代表的静态存储结构转化为方法区的运行时<a href="http://lib.csdn.net/base/datastructure" target="_blank" rel="external">数据结构</a>；</p>
+<p>3、 在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各个数据的访问入口</p>
+<p>加载阶段完成后，虚拟机外部的二进制字节流就按照虚拟机所需的格式存储在方法区，方法区的数据存储格式有虚拟机实现自行定义，虚拟机规范并未规定此区域的具体数据结构。然后在内存中实例化一个java.lang.Class类的对象。<strong>对象并不一定保存在堆中，像Class对象，保存在方法区中。</strong></p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>目的是为了确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+<p>1、 文件格式验证：保证输入的字节流能正确地解析并存储于方法区之内</p>
+<p>2、 元数据验证：（针对数据类型）对字节码描述的信息进行语义分析，保证其描述的信息符合java语言规范的要求</p>
+<p>3、 字节码验证：（针对方法体）通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。主要是对类的方法体进行校验分析，保证被校验类的方法在运行时不会做出危害虚拟机安全的事件。</p>
+<p>4、 符号引用验证：确保解析动作能正常执行。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>正式为类变量分配内存并设置类变量初始值的阶段，都是“零值”。这些变量所使用的内存都将在方法区中进行分配。这里所进行的内存分配仅包括类变量，不包括实例变量（实例变量将在对象实例化时随对象一起被分配在java堆中）。但是如果类字段的字段属性表中存在ConstantValue属性，即常量，那么准备阶段变量的value值就会被初始化为ConstantValue属性所指定的值。例如public static<strong>final</strong> intvalue = 123；此时value初始值就已经为123。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
+<p><strong>符号引用</strong>：能无歧义的定位到目标的一组符号。它与虚拟机实现的内存布局无关，引用的目标不一定已经加载在内存中。</p>
+<p><strong>直接引用</strong>：可以直接指向目标、相对偏移量或是一个能间接定位到目标的句柄，它和虚拟机实现的内存分布是相关的，如果有了直接引用，那么引用的目标必定已经存在于内存中。</p>
+<p>解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化阶段，根据程序员制定的主观计划去初始化类变量和其他成员。话句话就是说：初始化阶段是执行类构造器<clinit>()方法的过程。虚拟机会保证在子类的<clinit>()方法执行之前，父类的<clinit>()方法已经执行完毕，意味着父类中定义的静态语句块要优先于子类中的变量赋值操作。但是执行接口的<clinit>()方法不需要先执行父类接口的<clinit>()方法，而且接口的实现类在初始化时也一样不会执行接口的<clinit>()方法。</clinit></clinit></clinit></clinit></clinit></clinit></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -145,7 +176,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关于类加载机制"><span class="toc-number">1.</span> <span class="toc-text">关于类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Class文件"><span class="toc-number">1.1.</span> <span class="toc-text">Class文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类加载机制"><span class="toc-number">1.2.</span> <span class="toc-text">类加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#加载"><span class="toc-number">1.2.1.</span> <span class="toc-text">加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证"><span class="toc-number">1.2.2.</span> <span class="toc-text">验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备"><span class="toc-number">1.2.3.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解析"><span class="toc-number">1.2.4.</span> <span class="toc-text">解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化"><span class="toc-number">1.2.5.</span> <span class="toc-text">初始化</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
